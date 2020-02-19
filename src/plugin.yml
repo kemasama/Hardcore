@@ -1,0 +1,14 @@
+main: kema.hardcore.Game
+name: HardCore
+version: 1.0.0
+author: kemq_
+website: https://devras.info
+description: Tired survival ? Try hardcore survival !
+
+permissions:
+  hard.belive:
+    default: true
+
+commands:
+  belive:
+    permission: hard.belive
