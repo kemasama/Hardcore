@@ -35,10 +35,6 @@ public class JoinListener implements Listener {
 			p.sendMessage("§e---------------------------------");
 			p.sendMessage(" §eハードコアサバイバルへようこそ！");
 			p.sendMessage(" ");
-			p.sendMessage(" §a1. 死ぬな！");
-			p.sendMessage(" §a2. 諦めるな！");
-			p.sendMessage(" §a3. 信じるな！");
-			p.sendMessage(" ");
 			p.sendMessage(" §6 GoodLuck HaveFun :D");
 			p.sendMessage("§e---------------------------------");
 
