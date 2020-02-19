@@ -3,7 +3,7 @@ Hi!
 
 What this ?
 This is hardcore survival plugin for Spigot.
-You have to import spigot of 1.14.4 !
+You have to import spigot of 1.12.2 !
 
 Feature
 

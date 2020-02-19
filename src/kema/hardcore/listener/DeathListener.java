@@ -1,5 +1,6 @@
 package kema.hardcore.listener;
 
+import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -15,12 +16,7 @@ public class DeathListener implements Listener {
 		Player p = event.getEntity();
 
 		p.getWorld().strikeLightningEffect(p.getLocation());
-
-		p.sendMessage("§7-----------------------");
-		p.sendMessage(" §c死んでしまった...！");
-		p.sendMessage(" §a§l/belive §aコマンドで25%の確率で復活");
-		p.sendMessage("§7-----------------------");
-
+		p.getWorld().playSound(p.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER, 1f, 1f);
 		p.setBedSpawnLocation(null);
 	}
 

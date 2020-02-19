@@ -15,4 +15,5 @@ public class SpawnListener implements Listener {
 
 		pl.sendTitle("§c§lYou died", "");
 	}
+
 }

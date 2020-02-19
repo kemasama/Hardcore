@@ -30,6 +30,13 @@ public class CombatListener implements Listener {
 
 			event.setDamage(damage);
 		}
+
+		if (event.getEntity() instanceof LivingEntity) {
+			LivingEntity live = (LivingEntity) event.getEntity();
+			if (live.getNoDamageTicks() >= 10) {
+				event.setCancelled(true);
+			}
+		}
 	}
 
 	public void addPlate(LivingEntity live) {

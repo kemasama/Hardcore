@@ -21,13 +21,8 @@ public class ScoreTask extends BukkitRunnable {
 				}
 
 				helper.setTitle("");
-				helper.setSlot(9, "§1§l>> Player Info");
-				helper.setSlot(8, "§fLevel §e" + pl.getLevel());
-				helper.setSlot(7, "");
-				helper.setSlot(6, "");
-				helper.setSlot(5, "");
-				helper.setSlot(4, "");
-				helper.setSlot(3, "");
+				helper.setSlot(4, "§1§l>> Player Info");
+				helper.setSlot(3, "§fLevel §e" + pl.getLevel());
 				helper.setSlot(2, "");
 				helper.setSlot(1, "§eHardCoreSurvival");
 			}

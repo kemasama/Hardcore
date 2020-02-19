@@ -1,10 +1,15 @@
 package kema.hardcore.listener;
 
-import org.bukkit.Bukkit;
+import java.util.Random;
+
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
 public class LevelListener implements Listener {
 	@EventHandler
@@ -13,12 +18,25 @@ public class LevelListener implements Listener {
 			Player pl = event.getPlayer();
 
 			if (event.getNewLevel() % 10 == 0) {
-				pl.sendMessage("§a§lReach the " + event.getNewLevel() + " levels!!");
-				if (event.getNewLevel() % 100 == 0) {
-					Bukkit.broadcastMessage("§a" + pl.getName() + " reach the " + event.getNewLevel() + " levels");
-				}
+				pl.getWorld().dropItem(pl.getLocation(), getItem());
 			}
 
 		}
+	}
+
+	public ItemStack getItem() {
+		ItemStack item = new ItemStack(Material.ENCHANTED_BOOK);
+
+		EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();
+
+		meta.addStoredEnchant(Enchantment.values()[getRandom(Enchantment.values().length)], 1, true);
+
+		item.setItemMeta(meta);
+
+		return item;
+	}
+
+	public int getRandom(int src) {
+		return (new Random(System.currentTimeMillis())).nextInt(src);
 	}
 }
