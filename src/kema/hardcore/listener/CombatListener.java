@@ -34,7 +34,7 @@ public class CombatListener implements Listener {
 		if (event.getEntity() instanceof LivingEntity) {
 			LivingEntity live = (LivingEntity) event.getEntity();
 			if (live.getNoDamageTicks() >= 10) {
-				event.setCancelled(true);
+				event.setDamage(0.0);
 			}
 		}
 	}

@@ -23,19 +23,29 @@ public class Game extends JavaPlugin {
 	}
 
 	private Config config;
+	private HideHelper hideHelper;
+
 	public Config getGConfig() {
 		return config;
+	}
+	public static HideHelper getHideHelper() {
+		return getInstance().hideHelper;
 	}
 
 	@Override
 	public void onDisable() {
 		super.onDisable();
 
-		for (Player pl : Bukkit.getOnlinePlayers()) {
-			HideHelper.show(pl);
+		try {
+			for (Player pl : Bukkit.getOnlinePlayers()) {
+				hideHelper.show(pl);
+			}
+		} catch (Exception e) {
 		}
 
+
 		config = null;
+		hideHelper = null;
 	}
 
 	@Override
@@ -49,6 +59,8 @@ public class Game extends JavaPlugin {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		hideHelper = new HideHelper();
 
 		Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
 		Bukkit.getPluginManager().registerEvents(new ChatListener(), this);

@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import kema.hardcore.HideHelper;
+import kema.hardcore.Game;
 import kema.hardcore.util.CustomItem;
 
 public class JoinListener implements Listener {
@@ -39,23 +39,25 @@ public class JoinListener implements Listener {
 			PlayerInventory inv = p.getInventory();
 			inv.setItem(0, new CustomItem(Material.STONE_SWORD).addEnchantment(Enchantment.DAMAGE_ALL, 1).toItem());
 			inv.setItem(1, new CustomItem(Material.STONE_PICKAXE).addEnchantment(Enchantment.DIG_SPEED, 3).toItem());
-			inv.setItem(2, new CustomItem(Material.STONE_HOE).addEnchantment(Enchantment.DIG_SPEED, 3).toItem());
-			inv.setItem(3, new CustomItem(Material.STONE_AXE).addEnchantment(Enchantment.DIG_SPEED, 3).toItem());
-			inv.setItem(4, new CustomItem(Material.STONE_SPADE).toItem());
-			inv.setItem(5, new ItemStack(Material.BREAD, 32));
+			inv.setItem(2, new CustomItem(Material.STONE_AXE).addEnchantment(Enchantment.DIG_SPEED, 3).toItem());
+			inv.setItem(3, new CustomItem(Material.STONE_SPADE).addEnchantment(Enchantment.DIG_SPEED, 3).toItem());
+			//inv.setItem(4, new CustomItem(Material.STONE_HOE).toItem());
+			inv.addItem(new ItemStack(Material.BREAD, 8));
 
+			/*
 			inv.setHelmet(new CustomItem(Material.LEATHER_HELMET).addEnchantment(Enchantment.DURABILITY, 1).toItem());
 			inv.setChestplate(new CustomItem(Material.LEATHER_CHESTPLATE).addEnchantment(Enchantment.DURABILITY, 1).toItem());
 			inv.setLeggings(new CustomItem(Material.LEATHER_LEGGINGS).addEnchantment(Enchantment.DURABILITY, 1).toItem());
 			inv.setBoots(new CustomItem(Material.LEATHER_BOOTS).addEnchantment(Enchantment.PROTECTION_FALL, 1).toItem());
+			*/
 
-			p.setNoDamageTicks(20 * 10 * 60);
+			p.setNoDamageTicks(20 * 10);
 
 		}
 
 		for (Player pl : Bukkit.getOnlinePlayers()) {
 			if (pl.getGameMode().equals(GameMode.SPECTATOR)) {
-				HideHelper.hide(pl, p);
+				Game.getHideHelper().hide(pl, p);
 			}
 		}
 

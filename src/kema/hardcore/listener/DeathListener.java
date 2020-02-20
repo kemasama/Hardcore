@@ -1,16 +1,21 @@
 package kema.hardcore.listener;
 
+import java.util.Random;
+
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.inventory.ItemStack;
 
-import kema.hardcore.HideHelper;
+import kema.hardcore.Game;
 
 public class DeathListener implements Listener {
 	@EventHandler
@@ -21,7 +26,7 @@ public class DeathListener implements Listener {
 		p.getWorld().playSound(p.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER, 1f, 1f);
 		p.setBedSpawnLocation(null);
 
-		HideHelper.hide(p);
+		Game.getHideHelper().hide(p);
 	}
 
 	@EventHandler
@@ -32,12 +37,24 @@ public class DeathListener implements Listener {
 
 		LivingEntity live = event.getEntity();
 
-		int exp = event.getDroppedExp() + 1;
-		if (event.getDrops().size() > 0) {
-			exp += event.getDrops().size();
+		if (event.getDroppedExp() > 0) {
+			event.setDroppedExp(event.getDroppedExp() * 2);
 		}
 
-		event.setDroppedExp(exp);
+		if (live.getType().equals(EntityType.ENDERMAN)) {
+			if (event.getDrops().size() == 0) {
+				event.getDrops().add(new ItemStack(Material.ENDER_PEARL));
+			}
+		}
+
+		if (live.getType().equals(EntityType.SKELETON)) {
+			event.getDrops().clear();
+			event.getDrops().add(new ItemStack(Material.ARROW));
+			if (getRand()) {
+				event.getDrops().add(new ItemStack(Material.BOW));
+			}
+		}
+
 
 		for (Entity e : live.getPassengers()) {
 			if (e instanceof ArmorStand) {
@@ -45,5 +62,10 @@ public class DeathListener implements Listener {
 			}
 		}
 
+	}
+
+	private Random random = new Random();
+	private boolean getRand() {
+		return random.nextBoolean();
 	}
 }
