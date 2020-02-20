@@ -10,6 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
+import kema.hardcore.HideHelper;
+
 public class DeathListener implements Listener {
 	@EventHandler
 	public void onDeath(PlayerDeathEvent event) {
@@ -18,6 +20,8 @@ public class DeathListener implements Listener {
 		p.getWorld().strikeLightningEffect(p.getLocation());
 		p.getWorld().playSound(p.getLocation(), Sound.ENTITY_LIGHTNING_THUNDER, 1f, 1f);
 		p.setBedSpawnLocation(null);
+
+		HideHelper.hide(p);
 	}
 
 	@EventHandler

@@ -1,5 +1,6 @@
 package kema.hardcore.listener;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -14,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import kema.hardcore.Game;
+import kema.hardcore.HideHelper;
 import kema.hardcore.util.CustomItem;
 
 public class JoinListener implements Listener {
@@ -58,6 +60,12 @@ public class JoinListener implements Listener {
 
 			p.setNoDamageTicks(20 * 10 * 60);
 
+		}
+
+		for (Player pl : Bukkit.getOnlinePlayers()) {
+			if (pl.getGameMode().equals(GameMode.SPECTATOR)) {
+				HideHelper.hide(pl, p);
+			}
 		}
 
 	}

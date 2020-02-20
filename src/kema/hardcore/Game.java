@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import kema.hardcore.api.HypixelAPIProxy;
@@ -35,6 +36,10 @@ public class Game extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		super.onDisable();
+
+		for (Player pl : Bukkit.getOnlinePlayers()) {
+			HideHelper.show(pl);
+		}
 
 		config = null;
 	}
