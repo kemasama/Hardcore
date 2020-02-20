@@ -1,13 +1,10 @@
 package kema.hardcore;
 
-import java.util.UUID;
-
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import kema.hardcore.api.HypixelAPIProxy;
 import kema.hardcore.commands.BeliveCommand;
 import kema.hardcore.listener.ArrowListener;
 import kema.hardcore.listener.ChatListener;
@@ -29,9 +26,6 @@ public class Game extends JavaPlugin {
 	public Config getGConfig() {
 		return config;
 	}
-
-	public static UUID hypixelAPIKey;
-	public HypixelAPIProxy hypixelAPIProxy;
 
 	@Override
 	public void onDisable() {
@@ -55,9 +49,6 @@ public class Game extends JavaPlugin {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		hypixelAPIKey = UUID.fromString("0764a580-72c6-4594-bd06-8d7f29916dd5");
-		hypixelAPIProxy = new HypixelAPIProxy();
 
 		Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
 		Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
