@@ -14,7 +14,6 @@ import kema.hardcore.listener.JoinListener;
 import kema.hardcore.listener.LevelListener;
 import kema.hardcore.listener.SpawnListener;
 import kema.hardcore.store.Config;
-import kema.hardcore.task.ScoreTask;
 
 public class Game extends JavaPlugin {
 
@@ -74,8 +73,8 @@ public class Game extends JavaPlugin {
 
 		Bukkit.getPluginCommand("belive").setExecutor(new BeliveCommand());
 
-		ScoreTask task = new ScoreTask();
-		task.runTaskTimer(this, 0L, 20L);
+		//ScoreTask task = new ScoreTask();
+		//task.runTaskTimer(this, 0L, 20L);
 	}
 
 }

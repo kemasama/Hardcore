@@ -12,12 +12,16 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.MapMeta;
+import org.bukkit.map.MapView;
+import org.bukkit.map.MapView.Scale;
 
 import kema.hardcore.Game;
 import kema.hardcore.util.CustomItem;
 
 public class JoinListener implements Listener {
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
 		Player p = event.getPlayer();
@@ -37,12 +41,26 @@ public class JoinListener implements Listener {
 			}
 
 			PlayerInventory inv = p.getInventory();
-			inv.setItem(0, new CustomItem(Material.STONE_SWORD).addEnchantment(Enchantment.DAMAGE_ALL, 1).toItem());
-			inv.setItem(1, new CustomItem(Material.STONE_PICKAXE).addEnchantment(Enchantment.DIG_SPEED, 3).toItem());
-			inv.setItem(2, new CustomItem(Material.STONE_AXE).addEnchantment(Enchantment.DIG_SPEED, 3).toItem());
-			inv.setItem(3, new CustomItem(Material.STONE_SPADE).addEnchantment(Enchantment.DIG_SPEED, 3).toItem());
+			inv.addItem(new CustomItem(Material.STONE_SWORD).addEnchantment(Enchantment.DAMAGE_ALL, 1).toItem());
+			inv.addItem(new CustomItem(Material.STONE_PICKAXE).addEnchantment(Enchantment.DIG_SPEED, 3).toItem());
+			inv.addItem(new CustomItem(Material.STONE_AXE).addEnchantment(Enchantment.DIG_SPEED, 3).toItem());
+			inv.addItem(new CustomItem(Material.STONE_SPADE).addEnchantment(Enchantment.DIG_SPEED, 3).toItem());
 			//inv.setItem(4, new CustomItem(Material.STONE_HOE).toItem());
 			inv.addItem(new ItemStack(Material.BREAD, 8));
+
+			try {
+				MapView map = Bukkit.createMap(Bukkit.getWorlds().get(0));
+				map.setScale(Scale.NORMAL);
+				map.setCenterX(p.getLocation().getBlockX());
+				map.setCenterZ(p.getLocation().getBlockZ());
+				ItemStack item = new ItemStack(Material.MAP, 1, map.getId());
+				MapMeta meta = (MapMeta) item.getItemMeta();
+				meta.setDisplayName("§eWorld Map");
+				item.setItemMeta(meta);
+				inv.addItem(item);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
 			/*
 			inv.setHelmet(new CustomItem(Material.LEATHER_HELMET).addEnchantment(Enchantment.DURABILITY, 1).toItem());
